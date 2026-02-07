@@ -1,5 +1,5 @@
 import React from "react";
-import { IoGridOutline } from "react-icons/io5";
+import { IoGrid } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
@@ -19,8 +19,10 @@ const Sidebar = () => {
         }}
       >
         <div className="d-flex my-2 gap-2">
-        <span style={{width:'24px',width:'24px',borderRadius:'8px',background:'black',color:'white',}}>
-              <IoGridOutline />
+        <span style={{width:'24px',width:'24px',borderRadius:'8px',background: location.pathname === "/home/overview"
+          ? "#6941C6"
+          : "black",color:'white',display:'flex',justifyContent:'center',alignItems:'center'}}>
+              <IoGrid/>
             </span>
           <Link
             style={{
@@ -36,8 +38,9 @@ const Sidebar = () => {
           </Link>
         </div>
         <div className="my-2 d-flex gap-2" >
-        <span style={{width:'24px',width:'24px',borderRadius:'8px',background:'black',color:'white',}}>
-              <IoGridOutline />
+        <span style={{width:'24px',width:'24px',borderRadius:'8px',background: location.pathname === "/home/peopleDiscover"
+                  ? "#6941C6":'black',color:'white',display:'flex',justifyContent:'center',alignItems:'center'}}>
+              <IoGrid />
             </span>
           <Link
             style={{
@@ -51,7 +54,7 @@ const Sidebar = () => {
             to={"/home/peopleDiscover"}
           >
            
-            <li>People</li>
+            <li>People Directory</li>
           </Link>
         </div>
       </ul>

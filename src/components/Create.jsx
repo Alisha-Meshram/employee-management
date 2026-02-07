@@ -26,7 +26,7 @@ const Create = () => {
 async function sendData(e){
 e.preventDefault()
 try {
-   await axios.post("https://696dd8ced7bacd2dd714ba5e.mockapi.io/employee-management",{name,email,status,role,team})
+   await axios.post("https://696dd8ced7bacd2dd714ba5e.mockapi.io/employee-management",{name,img,email,status,role,team})
    alert("data added")
    navigate('/home/peopleDiscover')
 } catch (error) {
@@ -44,8 +44,9 @@ try {
         <img src="https://cdn.twocontinents.com/hfpqy_V7_B_IMG_Dubai_UAE_1200x800_e1936b3330.jpg" alt="" style={{height:'100px',width:'100px',borderRadius:'100%'}} />
      
       </div>
-     <span style={{textAlign:"center", width:'50px'}}>
-     <Form.Control type="text" placeholder="Enter url" value={img} onChange={(e)=>{setImg(e.target.value)}} />
+     <span>
+     
+     <Form.Control type="text" style={{width:'300px', margin:'1rem auto'}} placeholder="Enter url" value={img} onChange={(e)=>{setImg(e.target.value)}} />
      </span>
       
        
@@ -56,20 +57,17 @@ try {
         <Form.Control type="text" placeholder="Enter Name" value={name} onChange={(e)=>{setName(e.target.value)}} />
        
       </Form.Group>
-      <Form.Group className="mb-3 w-50" controlId="formBasicEmail">
-        <Form.Label>Enter Url</Form.Label>
-        <Form.Control type="text" placeholder="Enter url" value={img} onChange={(e)=>{setImg(e.target.value)}} />
-       
-      </Form.Group>
-</div>
-  <div className='d-flex gap-5'>
       <Form.Group className="mb-3 w-50" controlId="formBasicPassword">
         <Form.Label>Email</Form.Label>
         <Form.Control type="email" placeholder="Enter Email" value={email} onChange={(e)=>{setEmail(e.target.value)}} />
       </Form.Group>
+</div>
+  <div className='d-flex gap-5'>
+     
       <Form.Group className="mb-3 w-50" controlId="formBasicPassword" >
         <Form.Label>Role</Form.Label>
         <Form.Select  value={role} onChange={(e)=>{setRole(e.target.value)}}>
+        <option value="Role">Role</option>
           <option value="Product Designer">Product Designer</option>
           <option value="Product Devloper">Product Devloper</option>
           <option value="UX Designer">UX Designer</option>
@@ -78,17 +76,19 @@ try {
         </Form.Select>
       
       </Form.Group>
-      </div>
-      <div className='d-flex gap-5'>
       <Form.Group className="mb-3 w-50" controlId="formBasicPassword">
       <Form.Label >Status</Form.Label>
       <Form.Select value={status} onChange={(e)=>{SetStatus(e.target.value)}}>
+      <option value="status">Status</option>
           <option value="Active">Active</option>
           <option value="Inactive">Inactive</option>
         </Form.Select>
        
      
       </Form.Group>
+      </div>
+      <div className='d-flex gap-5'>
+
       <Form.Group className="mb-3 w-50" controlId="formBasicPassword">
         <Form.Label>Team</Form.Label>
         <Form.Control type="text" placeholder="Enter Team"  value={team} onChange={(e)=>{setTeam(e.target.value)}} />
