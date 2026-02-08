@@ -5,6 +5,7 @@ import Home from "./Pages/Home";
 import Overview from "./components/Overview";
 import PeopleDiscovery from "./components/PeopleDiscovery";
 import Create from "./components/Create";
+import Edit from "./components/Edit";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/update" />
+          <Route path="/update/:id" element={<Edit />} />
           <Route path="/add" element={<Create />} />
           <Route path="/home" element={<Home />}>
 

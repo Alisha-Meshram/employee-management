@@ -41,7 +41,7 @@ try {
 
       <Form onSubmit={sendData} style={{padding:'1rem'}}>
       <div style={{margin:'auto',width:'100px'}}>
-        <img src="https://cdn.twocontinents.com/hfpqy_V7_B_IMG_Dubai_UAE_1200x800_e1936b3330.jpg" alt="" style={{height:'100px',width:'100px',borderRadius:'100%'}} />
+        <img src={img} alt="" style={{height:'100px',width:'100px',borderRadius:'100%'}} />
      
       </div>
      <span>
@@ -91,7 +91,15 @@ try {
 
       <Form.Group className="mb-3 w-50" controlId="formBasicPassword">
         <Form.Label>Team</Form.Label>
-        <Form.Control type="text" placeholder="Enter Team"  value={team} onChange={(e)=>{setTeam(e.target.value)}} />
+        <Form.Select value={team} onChange={(e)=>{setTeam(e.target.value)}}>
+      <option value="team">Team</option>
+          <option value="Design">Design</option>
+          <option value="Finance">Finance</option>
+          <option value="Product">Product</option>
+          <option value="Marketing">Marketing</option>
+        </Form.Select>
+        
+    
       </Form.Group>
      </div>
       <Button variant="primary" type="submit">

@@ -33,6 +33,10 @@ const PeopleDiscovery = () => {
     getData();
   }, []);
 
+  function edited(id){
+    navigate(`/update/${id}`)
+    console.log("success")
+  }
 
   const filteredData = data.filter((item) => {
     const value = search.toLowerCase();
@@ -64,7 +68,7 @@ const handlePage=((pageNumber)=>{
   setCurrentPage(pageNumber)
   })
   return (
-    <div className="p-3 " style={{ width: "1075px", height: "901px" }}>
+    <div className="p-3 " style={{ width: "1075px", }}>
       {/* top heading */}
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div className="d-flex gap-2">
@@ -114,78 +118,165 @@ const handlePage=((pageNumber)=>{
       </div>
 
       {/* 2nd eading */}
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <p style={{ width: "279px" }}>
-          Name{" "}
-          <span>
-            <FaArrowDownLong />
-          </span>
-        </p>
-        <p style={{ width: "109px" }}>
+   
+
+
+      <div style={{ overflowX: "auto" }}>
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+      <thead>
+      <tr
+        style={{
+          borderBottom: "1px solid #E4E7EC",
+          textAlign: "left",
+          height: "50px",
+        }}
+      >
+        <th style={{ width: "279px" }}>
+          Name <FaArrowDownLong />
+        </th>
+
+        <th style={{ width: "109px" }}>
           Status <FaArrowDownLong />
-        </p>
-        <p style={{ width: "179px" }}>
+        </th>
+
+        <th style={{ width: "179px" }}>
           Role <CiCircleQuestion />
-        </p>
-        <p style={{ width: "208px" }}>Email Address</p>
-        <p style={{ width: "294px" }}>Team</p>
-        <p style={{ width: "116px" }}></p>
+        </th>
+
+        <th style={{ width: "208px" }}>
+          Email Address
+        </th>
+
+        <th style={{ width: "294px" }}>
+          Team
+        </th>
+
+        <th style={{ width: "116px" }}></th>
+      </tr>
+    </thead>
+
+    <tbody>
+    {filteredData
+        .slice(indexFirstPage, indexLastPage)
+        .map((item) => {
+          const { id, name, img, role, status, email, team } = item;
+
+          return (
+            <tr
+              key={id}
+              style={{
+                borderBottom: "1px solid #E4E7EC",
+                height: "70px",
+              }}
+            >
+              {/* Name */}
+              <td>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px",fontWeight:'500' }}>
+                  <img
+                    src={img}
+                    alt=""
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "100%",
+                    }}
+                  />
+                  {name}
+                </div>
+              </td>
+
+              {/* Status */}
+              <td>
+                <button
+                  style={{
+                    border: "1px solid gray",
+                    borderRadius: "6px",
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    background: "white",
+                    color: "#344054",
+                    padding: "4px 10px",
+                  }}
+                >
+                  <GoDotFill color="green" /> {status}
+                </button>
+              </td>
+
+              {/* Role */}
+              <td>{role}</td>
+
+              {/* Email */}
+              <td>{email}</td>
+
+              {/* Team */}
+              <td>
+              
+              <button
+                  style={{
+                    border: "1px solid #6941C6",
+                    borderRadius: "6px",
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    background: "white",
+                    color: "#6941C6",
+                    padding: "4px 10px",
+                    marginLeft:'5px'
+                  }}
+                >
+                  {team}
+                </button>
+                <button
+                  style={{
+                    border: "1px solid #175CD3",
+                    borderRadius: "6px",
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    background: "white ",
+                    color: "#175CD3",
+                    padding: "4px 10px",
+                    margin:'0 10px'
+                  }}
+                >
+                 Product
+                </button>
+                <button
+                  style={{
+                    border: "1px solid #3538CD",
+                    borderRadius: "6px",
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    background: "white ",
+                    color: "#3538CD",
+                    padding: "4px 10px",
+                  }}
+                >
+                 Marketing
+                </button>
+                </td>
+
+              {/* Actions */}
+              <td>
+                <RiDeleteBin6Line
+                  onClick={() => deleteData(id)}
+                  className="mx-3"
+                  style={{ cursor: "pointer", color: "#475467" }}
+                />
+
+                <FaEdit
+                  onClick={() => edited(id)}
+                  style={{ cursor: "pointer", color: "#475467" }}
+                />
+              </td>
+            </tr>
+          );
+        })}
+    </tbody>
+      </table>
       </div>
 
-      {filteredData.slice(indexFirstPage,indexLastPage).map((item) => {
-        const { id, name, img, role, status, email, team } = item;
-        return (
-          <div
-            key={item.id}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              borderBottom: "1px solid gray",
-              padding: "1rem 0",
-            }}
-          >
-            <td style={{ width: "279px" }}>
-             
-              <img
-                src={img}
-                alt=""
-                style={{ width: "36px", height: "36px", borderRadius: "100%" }}
-              />
-              {name}
-            </td>
-            <td style={{ width: "109px" }}>
-              <button
-                style={{
-                  border: "1px solid gray",
-                  borderRadius: "6px",
-                  fontSize: "12px",
-                  fontWeight: "500",
-                  background: "white",
-                  color: "#344054",
-                }}
-              >
-                <GoDotFill color="green" /> {status}
-              </button>
-            </td>
-            <td style={{ width: "179px" }}>{role}</td>
-            <td style={{ width: "208px" }}>{email}</td>
-            <td style={{ width: "294px" }}>{team}</td>
-            <div style={{ width: "116px" }}>
-              <RiDeleteBin6Line
-                onClick={() => {
-                  deleteData(id);
-                }}
-                className="mx-3"
-                style={{ width: "15px", height: "16.67px", color: "#475467" }}
-              />
-              <FaEdit
-                style={{ width: "15px", height: "16.67px", color: "#475467" }}
-              />
-            </div>
-          </div>
-        );
-      })}
 
+
+{/* pagination */}
       <div style={{display:'flex',justifyContent:'space-between',marginTop:'2rem'}}>
       <button style={{color:'#344054',borderRadius:'10px',padding:'8px',fontSize:'1rem',fontWeight:'600'}} disabled={currentPage===1} onClick={()=>{handlePage(currentPage-1)}}><FaArrowLeft /> Previous</button>
       <div>
