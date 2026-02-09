@@ -41,7 +41,7 @@ try {
 
       <Form onSubmit={sendData} style={{padding:'1rem'}}>
       <div style={{margin:'auto',width:'100px'}}>
-        <img src={img} alt="" style={{height:'100px',width:'100px',borderRadius:'100%'}} />
+        <img src={img} alt="" style={{height:'100px',width:'100px',borderRadius:'100%',border:'1px solid gray'}} />
      
       </div>
      <span>
