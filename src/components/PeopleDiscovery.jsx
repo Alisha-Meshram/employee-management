@@ -225,7 +225,7 @@ const handlePage=((pageNumber)=>{
                 >
                   {team}
                 </button>
-                <button
+                {/* <button
                   style={{
                     border: "1px solid #175CD3",
                     borderRadius: "6px",
@@ -251,7 +251,7 @@ const handlePage=((pageNumber)=>{
                   }}
                 >
                  Marketing
-                </button>
+                </button> */}
                 </td>
 
               {/* Actions */}

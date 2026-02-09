@@ -12,8 +12,10 @@ const Edit = () => {
   const [img, setImg] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
-  const [team, setTeam] = useState("");
+  const teamOption = ["Design", "Marketing", "Product", "Finanace", "HR"];
+  const [team, setTeam] = useState([]);
   const [status, SetStatus] = useState("");
+  const [msg, setMsg] = useState("");
 
   async function getInformation() {
     const res = await axios.get(
@@ -43,6 +45,20 @@ const Edit = () => {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function addTeam(item) {
+    if (!item) return;
+    if (team.includes(item)) {
+      setMsg(`${item} is alredy added`);
+    } else {
+      setTeam([...team, item]);
+      setMsg("");
+    }
+  }
+
+  function removeTeam(item) {
+    setTeam(team.filter((t) => t !== item));
   }
 
   return (
@@ -125,13 +141,54 @@ const Edit = () => {
         <div className="d-flex gap-5">
           <Form.Group className="mb-3 w-50" controlId="formBasicPassword">
             <Form.Label>Team</Form.Label>
-            <Form.Select value={team} onChange={(e)=>{setTeam(e.target.value)}}>
+            <div style={{ display: "flex", gap: "10px" }}>
+              {team.map((item) => {
+                return (
+                  <span
+                    key={item}
+                    onClick={() => {
+                      removeTeam(item);
+                    }}
+                  >
+                    {item}*
+                  </span>
+                );
+              })}
+              <Form.Select
+                onChange={(e) => {
+                  addTeam(e.target.value);
+                  e.target.value = "";
+                }}
+              >
+                {teamOption.map((item) => {
+                  return (
+                    <option
+                      style={{
+                        border: "1px solid #6941C6",
+                        borderRadius: "6px",
+                        fontSize: "12px",
+                        fontWeight: "500",
+                        background: "white",
+                        color: "#6941C6",
+                        padding: "4px 10px",
+                        marginLeft: "5px",
+                      }}
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  );
+                })}
+              </Form.Select>
+            </div>
+            {/* <Form.Select value={team} onChange={(e)=>{setTeam(e.target.value)}}>
       <option value="team">Team</option>
           <option value="Design">Design</option>
           <option value="Finance">Finance</option>
           <option value="Product">Product</option>
           <option value="Marketing">Marketing</option>
-        </Form.Select>
+        </Form.Select> */}
           </Form.Group>
         </div>
         <Button variant="primary" type="submit">
