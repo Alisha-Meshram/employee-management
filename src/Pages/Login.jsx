@@ -15,7 +15,7 @@ const Login = () => {
         }
 
         if(email==="user@gmail.com"&& password==="12345"){
-navigate("/home")
+navigate("/home/overview")
         }else{
             setError("Please Enter Valid Information")
         }
