@@ -26,7 +26,7 @@ const Create = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "https://696dd8ced7bacd2dd714ba5e.mockapi.io/employee-management",
+        "http://localhost:8000/adduser",
         { name, img, email, status, role, team }
       );
       alert("data added");

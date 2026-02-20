@@ -25,7 +25,7 @@ const PeopleDiscovery = () => {
 
   async function getData() {
     const res = await axios.get(
-      "https://696dd8ced7bacd2dd714ba5e.mockapi.io/employee-management"
+      "http://localhost:8000/user"
     );
     setData(res.data);
   }
@@ -38,7 +38,7 @@ const PeopleDiscovery = () => {
     console.log("success")
   }
 
-  const filteredData = data.filter((item) => {
+  const filteredData =Array.isArray(data)? data.filter((item) => {
     const value = search.toLowerCase();
   
     return (
@@ -48,12 +48,12 @@ const PeopleDiscovery = () => {
       item.team.toLowerCase().includes(value) ||
       item.status.toLowerCase().includes(value)
     );
-  });
+  }):[];
 
   async function deleteData(id) {
     try {
       await axios.delete(
-        `https://696dd8ced7bacd2dd714ba5e.mockapi.io/employee-management/${id}`
+        `http://localhost:8000/deleteuser/${id}`
       );
       getData();
       alert("Are You sure you want to delete this member details? This action can not be undone.");
@@ -225,33 +225,7 @@ const handlePage=((pageNumber)=>{
                 >
                   {team}
                 </button>
-                {/* <button
-                  style={{
-                    border: "1px solid #175CD3",
-                    borderRadius: "6px",
-                    fontSize: "12px",
-                    fontWeight: "500",
-                    background: "white ",
-                    color: "#175CD3",
-                    padding: "4px 10px",
-                    margin:'0 10px'
-                  }}
-                >
-                 Product
-                </button>
-                <button
-                  style={{
-                    border: "1px solid #3538CD",
-                    borderRadius: "6px",
-                    fontSize: "12px",
-                    fontWeight: "500",
-                    background: "white ",
-                    color: "#3538CD",
-                    padding: "4px 10px",
-                  }}
-                >
-                 Marketing
-                </button> */}
+               
                 </td>
 
               {/* Actions */}
@@ -285,7 +259,7 @@ const handlePage=((pageNumber)=>{
     {
       [...Array(itemPage).keys()].map((num)=>{
         return(
-          <button style={{border:'none',margin:'10px',gap:'12px',fontSize:'14px',fontWeight:'600',padding:'8px',borderRadius:'8px',color:'#101828'}} disabled={currentPage===num+1} onClick={()=>{handlePage(num+1)}}>{num+1}</button>
+          <button key={num} style={{border:'none',margin:'10px',gap:'12px',fontSize:'14px',fontWeight:'600',padding:'8px',borderRadius:'8px',color:'#101828'}} disabled={currentPage===num+1} onClick={()=>{handlePage(num+1)}}>{num+1}</button>
         )
       })
     }

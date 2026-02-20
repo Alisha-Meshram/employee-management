@@ -6,6 +6,7 @@ import Overview from "./components/Overview";
 import PeopleDiscovery from "./components/PeopleDiscovery";
 import Create from "./components/Create";
 import Edit from "./components/Edit";
+import Register from "./Pages/Register";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/update/:id" element={<Edit />} />
           <Route path="/add" element={<Create />} />
+          <Route path="/register" element={<Register /> } />
           <Route path="/home" element={<Home />}>
 
             <Route path="overview" element={<Overview />} />

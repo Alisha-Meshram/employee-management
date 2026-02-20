@@ -19,14 +19,14 @@ const Edit = () => {
 
   async function getInformation() {
     const res = await axios.get(
-      `https://696dd8ced7bacd2dd714ba5e.mockapi.io/employee-management/${id}`
+      `http://localhost:8000/user/${id}`
     );
     console.log(res.data);
     setName(res.data.name);
     setEmail(res.data.email);
     setImg(res.data.img);
     setRole(res.data.role);
-    setTeam(res.data.team);
+    setTeam(Array.isArray(user.team)? user.team:[user.team]);
     SetStatus(res.data.status);
   }
 
@@ -37,7 +37,7 @@ const Edit = () => {
     e.preventDefault();
     try {
       await axios.put(
-        `https://696dd8ced7bacd2dd714ba5e.mockapi.io/employee-management/${id}`,
+        `http://localhost:8000/updateuser/${id}`,
         { name, email, img, status, role, team }
       );
       alert("update data sucessfully");
@@ -64,11 +64,16 @@ const Edit = () => {
   return (
     <div>
       <Form onSubmit={updateData} style={{ padding: "1rem" }}>
-        <div style={{ margin: "auto", width: "100px" }}>
+      <div style={{ margin: "auto", width: "100px" }}>
           <img
             src={img}
             alt=""
-            style={{ height: "100px", width: "100px", borderRadius: "100%" }}
+            style={{
+              height: "100px",
+              width: "100px",
+              borderRadius: "100%",
+              border: "1px solid gray",
+            }}
           />
         </div>
         <span>
@@ -182,13 +187,7 @@ const Edit = () => {
                 })}
               </Form.Select>
             </div>
-            {/* <Form.Select value={team} onChange={(e)=>{setTeam(e.target.value)}}>
-      <option value="team">Team</option>
-          <option value="Design">Design</option>
-          <option value="Finance">Finance</option>
-          <option value="Product">Product</option>
-          <option value="Marketing">Marketing</option>
-        </Form.Select> */}
+           
           </Form.Group>
         </div>
         <Button variant="primary" type="submit">
